@@ -364,4 +364,16 @@ textarea { resize: vertical; min-height: 110px; }
   .header-inner { position: relative; }
   .grid-3, .grid-2 { grid-template-columns: 1fr; }
   .hero-content { padding: 80px 0 110px; }
+
+  /* admin tables scroll horizontally instead of squishing/overlapping */
+  #q-list, #p-list { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .admin-table { min-width: 520px; }
+  .panel { padding: 16px; }
+  .section { padding: 34px 0; }
+  .tabs { gap: 5px; }
+  .tab { font-size: 9px; padding: 9px 10px; }
+  .test-top { gap: 10px; }
+  .qtext { font-size: 20px; }
+  .header-inner { gap: 10px; }
+  .brand-name { font-size: 13px; }
 }
