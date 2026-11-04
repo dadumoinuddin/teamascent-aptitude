@@ -31,6 +31,10 @@ questions in admin (`Question | A | B | C | D | correct(1-4)`).
   is written so that swap is the *only* file that changes.
 - Do not treat the current admin password as a secret.
 
+## Developer contact
+- dadumoinuddin@icloud.com
+- dadumoinuddin@gmail.com
+
 ## Going to production
 Reimplement each method in `js/api.js` against your backend, keeping the same method
 names and return shapes. Nothing else changes.

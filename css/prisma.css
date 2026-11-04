@@ -226,3 +226,5 @@ a { color: inherit; text-decoration: none; }
   gap: 14px; flex-wrap: wrap; color: var(--muted); font-size: 13px; align-items: center;
 }
 .foot-brand { display: flex; align-items: center; gap: 10px; color: var(--cream); font-weight: 800; }
+.foot-contact a { color: var(--cream-2); text-decoration: underline; }
+.foot-contact a:hover { color: var(--cream); }
