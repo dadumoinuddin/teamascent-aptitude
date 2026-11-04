@@ -170,7 +170,7 @@ a { color: inherit; text-decoration: none; }
 .about-head .serif { color: var(--cream); }
 .about-body {
   color: var(--cream-2); font-size: 14px; line-height: 1.7; max-width: 60ch;
-  margin: 40px auto 0;
+  margin: 40px auto 0; overflow-wrap: break-word; word-break: normal; white-space: normal;
 }
 @media (min-width: 768px) { .about-body { font-size: 17px; } }
 .about-body .char { transition: opacity .1s linear; }

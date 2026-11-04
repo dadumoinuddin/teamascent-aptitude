@@ -88,9 +88,11 @@
   let chars = [];
   if (aboutBody) {
     const text = aboutBody.textContent;
+    // Wrap non-space characters for the reveal; keep spaces as real,
+    // breakable whitespace so the paragraph wraps inside its card.
     aboutBody.innerHTML = text
       .split("")
-      .map((c) => `<span class="char" style="opacity:.2">${c === " " ? "&nbsp;" : escapeHtml(c)}</span>`)
+      .map((c) => (c === " " ? " " : `<span class="char" style="opacity:.2">${escapeHtml(c)}</span>`))
       .join("");
     chars = $$(".char", aboutBody);
   }
