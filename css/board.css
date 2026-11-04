@@ -1,0 +1,145 @@
+/* =============================================================
+   TeamAscent — Leaderboard: editorial data storytelling
+   Cream / ink. Red = the leader (the series that matters).
+   Muted blue = everyone else. Big labels. Real numbers only.
+   ============================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --cream: #fffdf7;
+  --ink: #222222;
+  --ink-soft: #595751;
+  --red: #d62828;
+  --blue: #457b9d;
+  --rule: #e4ded0;
+  --cream-2: #f6f1e6;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.board-wrap { width: min(980px, 92vw); margin: 0 auto; padding: 40px 0 72px; }
+
+/* ---------- Masthead ---------- */
+.board-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.board-back {
+  font-size: 15px; font-weight: 600; color: var(--ink-soft);
+  text-decoration: none; letter-spacing: .04em; text-transform: uppercase;
+}
+.board-back:hover { color: var(--red); }
+
+.kicker {
+  font-size: 15px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--red); margin: 36px 0 10px;
+}
+.board-title {
+  font-family: 'Fraunces', serif; font-weight: 900;
+  font-size: clamp(38px, 7vw, 76px); line-height: 1.02; margin: 0;
+  letter-spacing: -0.01em;
+}
+.board-meta {
+  margin: 16px 0 4px; font-size: 19px; color: var(--ink-soft);
+  display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center;
+}
+.status-dot { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+.status-dot i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.live i { background: var(--red); animation: pulse 1.4s infinite; }
+.final i { background: var(--ink); }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+.status-dot.live { color: var(--red); }
+
+.rule { height: 3px; background: var(--ink); margin: 22px 0 10px; }
+.rule-thin { height: 1px; background: var(--rule); margin: 0; }
+
+/* ---------- Podium ---------- */
+.podium {
+  display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: 18px;
+  align-items: end; margin: 40px 0 10px;
+}
+.pod {
+  text-align: center; padding: 22px 14px 0;
+}
+.pod-name {
+  font-size: 30px; font-weight: 700; line-height: 1.1; margin-bottom: 4px;
+  word-break: break-word;
+}
+.pod-email { font-size: 17px; color: var(--ink-soft); margin-bottom: 14px; }
+.pod-bar {
+  border-radius: 6px 6px 0 0; color: var(--cream);
+  display: flex; flex-direction: column; justify-content: flex-start;
+  align-items: center; padding-top: 16px; transform-origin: bottom;
+}
+.pod-rank { font-family: 'Fraunces', serif; font-weight: 900; font-size: 40px; }
+.pod-score { font-size: 46px; font-weight: 800; font-variant-numeric: tabular-nums; margin-top: 6px; }
+.pod-score small { font-size: 18px; font-weight: 600; opacity: .85; }
+.pod-1 .pod-bar { background: var(--red); height: 190px; }
+.pod-2 .pod-bar { background: var(--blue); height: 140px; }
+.pod-3 .pod-bar { background: var(--blue); height: 112px; opacity: .92; }
+
+/* ---------- Handwritten annotation ---------- */
+.annotation {
+  font-family: 'Caveat', cursive; font-size: 30px; color: var(--red);
+  line-height: 1.1; margin: 8px 0 0; display: flex; align-items: center; gap: 8px;
+}
+.annotation.blue { color: var(--blue); }
+.annotation svg { flex: none; }
+
+/* ---------- Standings bars ---------- */
+.standings { margin-top: 40px; }
+.standings h2 {
+  font-family: 'Fraunces', serif; font-size: 30px; font-weight: 600; margin: 0 0 6px;
+}
+.standings .sub { font-size: 17px; color: var(--ink-soft); margin: 0 0 18px; }
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 54px minmax(160px, 1.1fr) 2fr 86px;
+  align-items: center; gap: 16px; padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.bar-rank {
+  font-family: 'Fraunces', serif; font-weight: 900; font-size: 30px; color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.bar-name { font-size: 28px; font-weight: 700; line-height: 1.1; word-break: break-word; }
+.bar-email { font-size: 16px; color: var(--ink-soft); margin-top: 2px; }
+.you-tag {
+  font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--cream); background: var(--ink); padding: 2px 7px; border-radius: 3px; margin-left: 8px;
+}
+.bar-track { height: 26px; background: var(--cream-2); border-radius: 4px; overflow: hidden; }
+.bar-fill { height: 100%; width: 0; border-radius: 4px; background: var(--blue); }
+.bar-row.leader .bar-fill { background: var(--red); }
+.bar-score {
+  text-align: right; font-size: 34px; font-weight: 800; font-variant-numeric: tabular-nums;
+  color: var(--blue);
+}
+.bar-row.leader .bar-score { color: var(--red); }
+
+.empty-board {
+  text-align: center; padding: 60px 0; color: var(--ink-soft);
+}
+.empty-board .big {
+  font-family: 'Fraunces', serif; font-size: 34px; color: var(--ink); margin-bottom: 8px;
+}
+
+.board-foot {
+  margin-top: 30px; font-size: 16px; color: var(--ink-soft);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+
+@media (max-width: 680px) {
+  .podium { grid-template-columns: 1fr; }
+  .pod-1 .pod-bar, .pod-2 .pod-bar, .pod-3 .pod-bar { height: 92px; }
+  .bar-row { grid-template-columns: 40px 1fr 70px; }
+  .bar-track { display: none; } /* bars collapse to score on tiny screens */
+  .bar-name { font-size: 24px; }
+}

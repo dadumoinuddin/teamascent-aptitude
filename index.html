@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TeamAscent · Aptitude Arena</title>
+  <meta name="description" content="TeamAscent Aptitude Arena — 15 questions, 15 minutes, one shot at the summit. Climb the live leaderboard." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><polygon points='10,21 16,5 22,21' fill='%23E1E0CC'/><polygon points='4,21 10,8 16,21' fill='%23457b9d'/></svg>" />
+  <link rel="stylesheet" href="css/prisma.css" />
+</head>
+<body>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div class="hero-frame">
+      <video class="hero-video" id="hero-video" autoplay loop muted playsinline preload="auto">
+        <source src="assets/hero-loop.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-overlay noise-overlay"></div>
+      <div class="hero-overlay grad"></div>
+
+      <nav class="nav-pill">
+        <a class="nav-brand" href="index.html">
+          <svg viewBox="0 0 24 24" shape-rendering="crispEdges"><polygon points="4,21 10,8 16,21" fill="#457b9d"/><polygon points="10,21 16,5 22,21" fill="#E1E0CC"/></svg>
+          ASCENT
+        </a>
+        <a href="join.html">Enter Session</a>
+        <a href="leaderboard.html">Leaderboard</a>
+        <a href="admin.html">Admin</a>
+      </nav>
+
+      <div class="hero-content">
+        <h1 class="hero-huge pull" id="hero-title" data-text="Team Ascent" data-asterisk="1"></h1>
+        <div class="hero-right">
+          <div class="session-chip" id="session-chip" style="display:none;">
+            <span class="dot"></span><span id="chip-text">Loading…</span>
+          </div>
+          <p class="hero-desc">
+            TeamAscent is a proving ground for sharp minds — fifteen questions, fifteen
+            minutes, one shot at the summit. Join a live session and climb the ranks in real time.
+          </p>
+          <div class="cta-row">
+            <a href="join.html" class="cta">Enter the test
+              <span class="circle">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </a>
+            <a href="leaderboard.html" class="cta cta-ghost">View leaderboard</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section class="about">
+    <div class="about-card">
+      <div class="about-label">The Arena</div>
+      <h2 class="about-head" id="about-head"></h2>
+      <p class="about-body" id="about-body">Every session is the same promise: a level field, a ticking clock, and a leaderboard that updates while you watch. No second attempts, no hidden advantages — just how fast and how sharp you really are. Finish, and you land straight on the board with the pack behind you.</p>
+    </div>
+  </section>
+
+  <!-- ===================== FEATURES ===================== -->
+  <section class="features">
+    <div class="bg-noise"></div>
+    <div class="features-inner">
+      <h2 class="features-head" id="features-head"></h2>
+      <div class="cards">
+
+        <!-- Card 1: our original pixel art -->
+        <div class="card card-media">
+          <span class="cap-sub">16-bit · original art</span>
+          <canvas id="hero-canvas" class="pix" aria-label="Pixel climber ascending to the summit"></canvas>
+          <span class="cap">Climb the ranks.</span>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+          <div class="card-ico">🎟️</div>
+          <h3>Join with a code <span class="num">01</span></h3>
+          <ul>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Name, email & a 4-digit session code</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Codes are set by your admin</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Late entry window, enforced fairly</li>
+          </ul>
+          <a class="learn" href="join.html">Enter session
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+          <div class="card-ico">⏱️</div>
+          <h3>The 15-min sprint <span class="num">02</span></h3>
+          <ul>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>15 questions, one minute each</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Per-question + overall countdown</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Auto-submits when time runs out</li>
+          </ul>
+          <a class="learn" href="join.html">Start a run
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card">
+          <div class="card-ico">🏆</div>
+          <h3>Live leaderboard <span class="num">03</span></h3>
+          <ul>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Refreshes every 30 seconds</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Names & emails partially masked</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Finish → land on the board</li>
+          </ul>
+          <a class="learn" href="leaderboard.html">See standings
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="foot">
+    <div class="foot-inner">
+      <span class="foot-brand">
+        <svg width="20" height="20" viewBox="0 0 24 24" shape-rendering="crispEdges"><polygon points="4,21 10,8 16,21" fill="#457b9d"/><polygon points="10,21 16,5 22,21" fill="#E1E0CC"/></svg>
+        TeamAscent
+      </span>
+      <span>Aptitude Arena · built to be climbed</span>
+      <span>Demo build · backend-ready</span>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/pixelscene.js"></script>
+  <script src="js/landing.js"></script>
+</body>
+</html>

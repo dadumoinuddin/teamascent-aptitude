@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arena · TeamAscent</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><polygon points='10,21 16,5 22,21' fill='%23ff2e88'/><polygon points='4,21 10,8 16,21' fill='%237c5cff'/></svg>" />
+  <link rel="stylesheet" href="css/pixel.css" />
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="section">
+    <div class="container" style="max-width:780px;">
+
+      <!-- WAITING ROOM -->
+      <section id="view-wait" class="panel center hidden">
+        <h1 class="panel-title">▸ Waiting Room</h1>
+        <p id="wait-title" class="big-num mb"></p>
+        <p class="muted mb">The test unlocks automatically when the timer hits zero.</p>
+        <div id="wait-countdown" class="countdown cd-big"></div>
+        <p id="wait-note" class="muted mt"></p>
+      </section>
+
+      <!-- TEST -->
+      <section id="view-test" class="hidden">
+        <div class="test-top">
+          <span class="pill pill-live" id="q-counter">Q 1 / 15</span>
+          <div class="row" style="gap:10px;">
+            <span class="netping" id="netping" title="Your connection to the server">● -- ms</span>
+            <div class="qtimer" id="q-timer">01:00</div>
+          </div>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="q-progress"></div></div>
+
+        <div class="panel mt">
+          <p class="qtext" id="q-text">…</p>
+          <div class="options" id="q-options"></div>
+          <div class="row space-between mt">
+            <span class="muted" id="q-session-timer">Session: --:--</span>
+            <button class="btn btn-accent" id="q-next">Next ▶</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- CLOSED / INFO -->
+      <section id="view-info" class="panel center hidden">
+        <h1 class="panel-title" id="info-title">▸ Notice</h1>
+        <p id="info-msg" class="muted mb"></p>
+        <div class="hero-cta" style="justify-content:center;">
+          <a href="leaderboard.html" class="btn btn-accent">★ Leaderboard</a>
+          <a href="join.html" class="btn btn-ghost">Back to Lobby</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <!-- Proctor warning overlay -->
+  <div id="proctor-overlay" class="proctor-overlay hidden">
+    <div class="proctor-box">
+      <div class="proctor-icon">⚠</div>
+      <h2 id="proctor-title">Stay on the test</h2>
+      <p id="proctor-msg">Leaving the test window is not allowed during a live session. Your timer keeps running.</p>
+      <div class="strikes" id="strikes"></div>
+      <button class="btn btn-primary" id="proctor-resume">Return to test</button>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/test.js"></script>
+</body>
+</html>

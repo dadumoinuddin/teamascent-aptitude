@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Standings · TeamAscent</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><polygon points='10,21 16,5 22,21' fill='%23ff2e88'/><polygon points='4,21 10,8 16,21' fill='%237c5cff'/></svg>" />
+  <link rel="stylesheet" href="css/pixel.css" />
+  <style>
+    .board-head { display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:16px; }
+    .board-head h1 { font-size:15px; color:var(--accent-3); margin:0; }
+    #board-frame {
+      border:4px solid #120a1f; box-shadow:8px 8px 0 var(--shadow);
+      background:#1a1c2c; line-height:0; max-width:1000px; margin:0 auto 24px;
+    }
+    #board-canvas { display:block; width:100%; height:auto; image-rendering:pixelated; image-rendering:crisp-edges; }
+    .lb-list { list-style:none; margin:0; padding:0; }
+    .lb-row {
+      display:grid; grid-template-columns:48px 1fr 70px; gap:12px; align-items:center;
+      padding:12px 8px; border-bottom:2px solid var(--border);
+    }
+    .lb-row.me { background:#2d2550; }
+    .lb-rank { font-family:var(--font-pixel); font-size:13px; color:var(--accent-3); }
+    .lb-name { font-size:19px; }
+    .lb-name .you { font-family:var(--font-pixel); font-size:8px; color:#06121a; background:var(--cyan); padding:2px 6px; margin-left:8px; }
+    .lb-email { color:var(--ink-dim); font-size:15px; margin-top:2px; }
+    .lb-tabs { font-family:var(--font-pixel); font-size:8px; color:var(--ink-dim); margin-top:5px; }
+    .lb-tabs.warn { color:var(--red); }
+    .lb-score { font-family:var(--font-pixel); font-size:14px; color:var(--cyan); text-align:right; }
+    .lb-top1 .lb-score { color:var(--accent-3); }
+    .lb-empty { text-align:center; color:var(--ink-dim); padding:22px 0; }
+    @media (max-width:640px){
+      .lb-row{ grid-template-columns:38px 1fr 56px; }
+      .lb-email{ display:none; }
+    }
+  </style>
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="section">
+    <div class="container">
+      <div class="board-head">
+        <h1 id="board-title">★ Standings</h1>
+        <div class="row" style="gap:10px;">
+          <span class="pill" id="board-status">—</span>
+          <span class="muted" id="board-sub" style="font-size:15px;"></span>
+        </div>
+      </div>
+
+      <div id="board-frame">
+        <canvas id="board-canvas" aria-label="Pixel-art leaderboard podium"></canvas>
+      </div>
+
+      <div class="panel">
+        <div class="row space-between">
+          <h2 class="panel-title" style="margin:0;">▸ Full Standings</h2>
+          <span class="pill" id="finisher-count">0 finishers</span>
+        </div>
+        <ol class="lb-list mt" id="lb-list">
+          <li class="lb-empty">Loading…</li>
+        </ol>
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/leaderboard.js"></script>
+</body>
+</html>

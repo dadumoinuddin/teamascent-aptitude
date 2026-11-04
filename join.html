@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enter Session · TeamAscent</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><polygon points='10,21 16,5 22,21' fill='%23ff2e88'/><polygon points='4,21 10,8 16,21' fill='%237c5cff'/></svg>" />
+  <link rel="stylesheet" href="css/pixel.css" />
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="section">
+    <div class="container">
+      <div class="grid grid-2">
+
+        <!-- LEFT: join form + countdown -->
+        <div>
+          <div class="panel">
+            <h1 class="panel-title">▸ Enter A Session</h1>
+            <div id="session-banner" class="stack mb"></div>
+
+            <form id="join-form" class="stack" autocomplete="off">
+              <label class="field">
+                <span>Full Name</span>
+                <input id="f-name" type="text" maxlength="40" placeholder="Ada Lovelace" required />
+              </label>
+              <label class="field">
+                <span>Email</span>
+                <input id="f-email" type="email" maxlength="60" placeholder="you@college.edu" required />
+              </label>
+              <label class="field">
+                <span>5-Character Session Code</span>
+                <input id="f-code" class="code-input" autocapitalize="characters" maxlength="5" placeholder="ABC12" required />
+              </label>
+              <div class="error-text" id="join-error"></div>
+              <button type="submit" class="btn btn-primary" id="join-btn">Join Session ▶</button>
+              <p class="hint">By joining you agree to a fair attempt. One try per session.</p>
+            </form>
+          </div>
+        </div>
+
+        <!-- RIGHT: schedule + mini leaderboard -->
+        <div class="stack">
+          <div class="panel">
+            <h2 class="panel-title">▸ Upcoming Schedule</h2>
+            <div id="schedule"><p class="muted">Loading…</p></div>
+          </div>
+
+          <div class="panel">
+            <div class="row space-between">
+              <h2 class="panel-title" style="margin:0;">★ Live Leaderboard</h2>
+              <a href="leaderboard.html" class="btn btn-sm btn-ghost">Full Board →</a>
+            </div>
+            <ol class="mini-board mt" id="mini-board">
+              <li class="mini-empty">No results yet.</li>
+            </ol>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/join.js"></script>
+</body>
+</html>

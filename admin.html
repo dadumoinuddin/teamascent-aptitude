@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin · TeamAscent</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><polygon points='10,21 16,5 22,21' fill='%23ff2e88'/><polygon points='4,21 10,8 16,21' fill='%237c5cff'/></svg>" />
+  <link rel="stylesheet" href="css/pixel.css" />
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="section">
+    <div class="container">
+
+      <!-- LOGIN -->
+      <section id="login-view" class="panel" style="max-width:440px;margin:0 auto;">
+        <h1 class="panel-title">▸ Admin Access</h1>
+        <form id="login-form" class="stack">
+          <label class="field">
+            <span>Password</span>
+            <input id="admin-pass" type="password" placeholder="••••••••" autocomplete="off" />
+          </label>
+          <div class="error-text" id="login-error"></div>
+          <button class="btn btn-primary" type="submit">Unlock Panel</button>
+          <p class="hint">Demo password is set in <code>js/config.js</code>. Replace with real auth in production.</p>
+        </form>
+      </section>
+
+      <!-- ADMIN APP -->
+      <section id="admin-view" class="hidden">
+        <div class="row space-between mb">
+          <h1 style="font-size:16px;color:var(--accent-3);margin:0;">⚙ Control Panel</h1>
+          <button class="btn btn-sm btn-ghost" id="logout-btn">Log out</button>
+        </div>
+
+        <div class="tabs">
+          <button class="tab is-active" data-tab="questions">Questions</button>
+          <button class="tab" data-tab="sessions">Sessions</button>
+          <button class="tab" data-tab="participants">Participants</button>
+        </div>
+
+        <!-- QUESTIONS TAB -->
+        <div class="tab-panel" data-panel="questions">
+          <div class="panel">
+            <div class="row space-between">
+              <h2 class="panel-title" style="margin:0;">Question Bank</h2>
+              <span class="pill" id="q-count">0 questions</span>
+            </div>
+            <div id="q-list" class="mt"></div>
+          </div>
+
+          <div class="panel">
+            <h2 class="panel-title" id="q-form-title">Add Question</h2>
+            <form id="q-form" class="stack">
+              <input type="hidden" id="q-id" />
+              <label class="field"><span>Question</span>
+                <textarea id="q-text" maxlength="300" placeholder="Type the question…" required></textarea>
+              </label>
+              <div class="grid grid-2">
+                <label class="field"><span>Option A</span><input id="q-o0" maxlength="120" required /></label>
+                <label class="field"><span>Option B</span><input id="q-o1" maxlength="120" required /></label>
+                <label class="field"><span>Option C</span><input id="q-o2" maxlength="120" required /></label>
+                <label class="field"><span>Option D</span><input id="q-o3" maxlength="120" required /></label>
+              </div>
+              <label class="field"><span>Correct Answer</span>
+                <select id="q-correct">
+                  <option value="0">A</option><option value="1">B</option>
+                  <option value="2">C</option><option value="3">D</option>
+                </select>
+              </label>
+              <div class="row">
+                <button class="btn btn-primary" type="submit" id="q-save">Save Question</button>
+                <button class="btn btn-ghost" type="button" id="q-cancel" style="display:none;">Cancel edit</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="panel">
+            <h2 class="panel-title">Bulk Import</h2>
+            <p class="inline-note mb">One question per line:<br>
+              <code>Question | A | B | C | D | correct(1-4)</code></p>
+            <textarea id="bulk-text" placeholder="What is 2+2? | 3 | 4 | 5 | 6 | 2"></textarea>
+            <label class="row mt" style="gap:8px;">
+              <input type="checkbox" id="bulk-replace" style="width:auto;" />
+              <span class="hint">Replace entire bank (otherwise append)</span>
+            </label>
+            <div class="row mt">
+              <button class="btn btn-accent" id="bulk-btn">Import</button>
+            </div>
+            <div class="error-text mt" id="bulk-error"></div>
+          </div>
+        </div>
+
+        <!-- SESSIONS TAB -->
+        <div class="tab-panel hidden" data-panel="sessions">
+          <div class="panel">
+            <h2 class="panel-title">Sessions</h2>
+            <div id="s-list" class="mt"></div>
+          </div>
+
+          <div class="panel">
+            <h2 class="panel-title" id="s-form-title">New Session</h2>
+            <form id="s-form" class="stack">
+              <input type="hidden" id="s-id" />
+              <div class="grid grid-2">
+                <label class="field"><span>Title</span><input id="s-title" maxlength="50" placeholder="Weekly Aptitude Arena" required /></label>
+                <label class="field"><span>5-Char Code (letters/digits)</span><input id="s-code" class="code-input" autocapitalize="characters" maxlength="5" placeholder="ASC01" required /></label>
+                <label class="field"><span>Start Time</span><input id="s-start" type="datetime-local" required /></label>
+                <label class="field"><span>Test Duration / Participant (min)</span><input id="s-duration" type="number" min="1" max="240" value="15" /></label>
+                <label class="field"><span>Seconds / Question</span><input id="s-perq" type="number" min="5" max="600" value="60" /></label>
+                <label class="field"><span>Join Window (min)</span><input id="s-join" type="number" min="1" max="600" value="90" /></label>
+                <label class="field"><span>Close After (hours)</span><input id="s-close" type="number" min="1" max="72" value="3" /></label>
+              </div>
+              <div class="row">
+                <button class="btn btn-primary" type="submit">Save Session</button>
+                <button class="btn btn-accent" type="button" id="s-startnow">Set start = now</button>
+                <button class="btn btn-ghost" type="button" id="s-cancel" style="display:none;">Cancel edit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- PARTICIPANTS TAB -->
+        <div class="tab-panel hidden" data-panel="participants">
+          <div class="panel">
+            <div class="row space-between">
+              <h2 class="panel-title" style="margin:0;">Participants</h2>
+              <select id="p-session" style="max-width:280px;"></select>
+            </div>
+            <div id="p-list" class="mt"></div>
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
