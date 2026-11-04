@@ -149,10 +149,19 @@
     const map = {
       scheduled: ["Upcoming", "pill-soon"], live: ["Live", "pill-live"],
       ended: ["Scoring", "pill-live"], closed: ["Closed", "pill-closed"],
+      paused: ["Paused", "pill-closed"],
     };
     const [l, c] = map[phase] || ["—", "pill-closed"];
     return `<span class="pill ${c}">${l}</span>`;
   }
+
+  // Global pause / resume for ALL sessions
+  $("#pause-all").addEventListener("click", () =>
+    Sessions.pauseAll(true).then((r) => { toast(`Paused ${r.count} session(s)`, "ok"); loadSessions(); })
+  );
+  $("#resume-all").addEventListener("click", () =>
+    Sessions.pauseAll(false).then((r) => { toast(`Resumed ${r.count} session(s)`, "ok"); loadSessions(); })
+  );
 
   function loadSessions() {
     Sessions.list().then((list) => {
@@ -174,6 +183,7 @@
               </div>
             </div>
             <span class="row-actions">
+              <button class="btn btn-sm ${s.paused ? "btn-accent" : "btn-ghost"}" data-stoggle="${s.id}" data-paused="${s.paused ? 1 : 0}">${s.paused ? "▶ Resume" : "⏸ Pause"}</button>
               <button class="btn btn-sm btn-accent" data-sedit="${s.id}">Edit</button>
               <button class="btn btn-sm btn-ghost" data-sboard="${s.id}">Board</button>
               <button class="btn btn-sm btn-danger" data-sdel="${s.id}">Del</button>
@@ -182,6 +192,14 @@
           })
           .join("");
 
+        $$("#s-list [data-stoggle]").forEach((b) =>
+          b.addEventListener("click", () =>
+            Sessions.setPaused(b.dataset.stoggle, b.dataset.paused !== "1").then(() => {
+              toast(b.dataset.paused === "1" ? "Session resumed" : "Session paused", "ok");
+              loadSessions();
+            })
+          )
+        );
         $$("#s-list [data-sedit]").forEach((b) =>
           b.addEventListener("click", () => editSession(b.dataset.sedit, list))
         );

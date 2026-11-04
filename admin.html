@@ -95,7 +95,13 @@
         <!-- SESSIONS TAB -->
         <div class="tab-panel hidden" data-panel="sessions">
           <div class="panel">
-            <h2 class="panel-title">Sessions</h2>
+            <div class="row space-between">
+              <h2 class="panel-title" style="margin:0;">Sessions</h2>
+              <span class="row-actions">
+                <button class="btn btn-sm btn-danger" id="pause-all">⏸ Pause all</button>
+                <button class="btn btn-sm btn-accent" id="resume-all">▶ Resume all</button>
+              </span>
+            </div>
             <div id="s-list" class="mt"></div>
           </div>
 

@@ -28,7 +28,7 @@ const DB = (() => {
     participants: "ascent.participants",
     me: "ascent.me",
     adminAuthed: "ascent.adminAuthed",
-    seeded: "ascent.seeded.v2",
+    seeded: "ascent.seeded.v3",
   };
 
   const read = (k, fallback) => {
@@ -87,6 +87,7 @@ const DB = (() => {
       joinWindowMin: CONFIG.DEFAULTS.joinWindowMin,
       closeAfterHours: CONFIG.DEFAULTS.closeAfterHours,
       status: "scheduled",
+      paused: true, // all sessions start paused (admin resumes when ready)
     };
     write(KEYS.sessions, [session]);
     write(KEYS.participants, []);
@@ -107,8 +108,9 @@ const DB = (() => {
     const joinWindowMin = s.joinWindowMin != null ? s.joinWindowMin : 90;
     const joinEnd = start + joinWindowMin * 60000;
     const closeAt = start + s.closeAfterHours * 3600000;
-    if (now < start) return { phase: "scheduled", start, joinEnd, closeAt };
     if (now >= closeAt) return { phase: "closed", start, joinEnd, closeAt };
+    if (s.paused) return { phase: "paused", start, joinEnd, closeAt };
+    if (now < start) return { phase: "scheduled", start, joinEnd, closeAt };
     if (now < joinEnd) return { phase: "live", start, joinEnd, closeAt };
     return { phase: "ended", start, joinEnd, closeAt };
   }
@@ -251,6 +253,21 @@ const Sessions = {
   state(s) {
     return DB.sessionState(s);
   },
+  // Pause / resume a single session.
+  setPaused(id, paused) {
+    const all = DB.read(DB.KEYS.sessions, []);
+    const s = all.find((x) => x.id === id);
+    if (s) s.paused = !!paused;
+    DB.write(DB.KEYS.sessions, all);
+    return DB.delay({ ok: true });
+  },
+  // Pause / resume ALL sessions at once.
+  pauseAll(paused) {
+    const all = DB.read(DB.KEYS.sessions, []);
+    all.forEach((s) => (s.paused = !!paused));
+    DB.write(DB.KEYS.sessions, all);
+    return DB.delay({ ok: true, count: all.length });
+  },
 };
 
 const Participants = {
@@ -271,6 +288,8 @@ const Participants = {
     const st = DB.sessionState(session);
     if (st.phase === "closed")
       return DB.delay({ ok: false, error: "This session has closed." });
+    if (st.phase === "paused")
+      return DB.delay({ ok: false, error: "This session is paused by the admin. Please try again shortly." });
     if (Date.now() > st.joinEnd)
       return DB.delay({ ok: false, error: "The joining window has closed for this session." });
 

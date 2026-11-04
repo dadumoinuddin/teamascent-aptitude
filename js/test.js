@@ -49,6 +49,10 @@
     }
 
     if (!participant.testStartedAt) {
+      if (st.phase === "paused") {
+        renderHold("Session paused", "This session has been paused by the admin. Keep this page open — it will continue when the session resumes.");
+        return;
+      }
       if (st.phase === "scheduled") { renderWaiting(st); return; }
       if (st.phase === "live") {
         // start this participant's personal clock now
@@ -73,6 +77,15 @@
     } else {
       tickTest(deadline);
     }
+  }
+
+  // ---------- Hold screen (paused) ----------
+  function renderHold(title, msg) {
+    phaseNow = "hold";
+    show("wait");
+    $("#wait-title").textContent = title;
+    $("#wait-countdown").innerHTML = "";
+    $("#wait-note").textContent = msg;
   }
 
   // ---------- Waiting room ----------

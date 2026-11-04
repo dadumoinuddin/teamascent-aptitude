@@ -88,7 +88,8 @@
 
   function buildLines() {
     lineQueue = [];
-    if (phase === "scheduled") { lineQueue = ["SESSION NOT STARTED", "CLIMBERS, STAND BY..."]; }
+    if (phase === "paused") { lineQueue = ["SESSION PAUSED", "STAND BY..."]; }
+    else if (phase === "scheduled") { lineQueue = ["SESSION NOT STARTED", "CLIMBERS, STAND BY..."]; }
     else if (!rows.length) { lineQueue = ["NO CLIMBERS YET", "BE THE FIRST TO THE SUMMIT"]; }
     else {
       const champ = rows[0];
@@ -182,7 +183,7 @@
     }
     // header
     ptext((session ? session.title : "STANDINGS").toUpperCase().slice(0, 26), 8, 10, HEX[11], 6, "left");
-    const stat = phase === "closed" ? ["FINAL", HEX[3]] : phase === "scheduled" ? ["SOON", HEX[4]] : ["LIVE", HEX[2]];
+    const stat = phase === "closed" ? ["FINAL", HEX[3]] : phase === "paused" ? ["PAUSE", HEX[10]] : phase === "scheduled" ? ["SOON", HEX[4]] : ["LIVE", HEX[2]];
     ptext(stat[0], W - 8, 10, stat[1], 6, "right");
 
     // typewriter dialogue
@@ -245,6 +246,7 @@
       live: ["Live", "pill-live", `Joining open · updates every 30s · window closes in ${fmtClock(st.joinEnd - Date.now())}`],
       ended: ["Running", "pill-live", `Board closes in ${fmtClock(st.closeAt - Date.now())}`],
       closed: ["Closed", "pill-closed", `Final result`],
+      paused: ["Paused", "pill-closed", `Session paused by the admin`],
     };
     const [l, c, sub] = map[phase] || ["—", "pill-closed", ""];
     statusEl.textContent = l; statusEl.className = "pill " + c;

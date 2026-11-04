@@ -125,7 +125,10 @@
       const st = Sessions.state(s);
       chip.classList.remove("soon", "closed");
       let txt;
-      if (st.phase === "scheduled") {
+      if (st.phase === "paused") {
+        chip.classList.add("closed");
+        txt = `${escapeHtml(s.title)} · paused`;
+      } else if (st.phase === "scheduled") {
         chip.classList.add("soon");
         txt = `${escapeHtml(s.title)} · starts in <b>${fmtClock(st.start - Date.now())}</b>`;
       } else if (st.phase === "live") {

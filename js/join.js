@@ -19,6 +19,7 @@
       live: ["Live Now", "pill-live"],
       ended: ["Scoring", "pill-live"],
       closed: ["Closed", "pill-closed"],
+      paused: ["Paused", "pill-closed"],
     };
     const [l, c] = map[phase] || ["—", "pill-closed"];
     return `<span class="pill ${c}">${l}</span>`;
@@ -31,7 +32,8 @@
     }
     const st = Sessions.state(featured);
     let line = "";
-    if (st.phase === "scheduled") line = `Starts in <b>${fmtClock(st.start - Date.now())}</b>`;
+    if (st.phase === "paused") line = `Paused by the admin — please wait.`;
+    else if (st.phase === "scheduled") line = `Starts in <b>${fmtClock(st.start - Date.now())}</b>`;
     else if (st.phase === "live") line = `Live — joining open · window closes in <b>${fmtClock(st.joinEnd - Date.now())}</b>`;
     else if (st.phase === "ended") line = `Joining closed · board closes in <b>${fmtClock(st.closeAt - Date.now())}</b>`;
     else line = `This session has closed.`;
